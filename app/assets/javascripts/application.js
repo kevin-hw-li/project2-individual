@@ -53,6 +53,8 @@
       snap.get_blob(function(img){
         console.log(img, this);
 
+        // $('.hidden_file').fileupload('option', 'formData').file = img;
+
         var reader  = new FileReader();
         reader.readAsDataURL(img);
         reader.onloadend = function () {
