@@ -12,21 +12,88 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require kairos
 //= require_tree .
 
-$(document).ready(function () {
+// $(document).ready(function () {
+  var camera = null;
+  var api_url = "https://api.kairos.com/enroll"
 
-  var camera = new JpegCamera("#camera");
+  var API_ID = "4b76f596";
+  var API_KEY = "3326986684ad5d3fde93d958cddcfb1f";
+  var GALLERY_NAME = "kevinGallery";
+  var kairos = new Kairos(API_ID, API_KEY);
+  console.log(kairos);
 
-  // var snapshot = camera.capture();
-  //
-  // snapshot.show(); // Display the snapshot
-  //
-  // snapshot.upload({api_url: "/upload_image"}).done(function(response) {
-  //   response_container.innerHTML = response;
-  //   this.discard(); // discard snapshot and show video stream again
-  // }).fail(function(status_code, error_message, response) {
-  //   alert("Upload failed with status " + status_code);
-  // });
+  var parseImageData = function(imageData) {
+      imageData = imageData.replace("data:image/jpeg;base64,", "");
+      imageData = imageData.replace("data:image/jpg;base64,", "");
+      imageData = imageData.replace("data:image/png;base64,", "");
+      imageData = imageData.replace("data:image/gif;base64,", "");
+      imageData = imageData.replace("data:image/bmp;base64,", "");
+      return imageData;
+  }
 
-})
+  var initCamera = function () {
+    if (!window.JpegCamera) {
+      alert('Camera access is not available in your browser');
+    } else {
+      camera = new JpegCamera('#camera')
+        .ready(function (resolution) {})
+        .error(function () {
+        alert('Camera access was denied');
+      })
+    }
+  };
+
+  var capturePhoto = function () {
+    $('#capture').on('click',function () {
+
+      var snap = camera.capture();
+      snap.get_blob(function(img){
+        console.log(img, this);
+
+        var reader  = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onloadend = function () {
+          var fileData = parseImageData(reader.result);
+          kairos.enroll(fileData, GALLERY_NAME, 'jared', function (data) {
+            console.log('success!', data);
+          });
+          // console.log(fileData);
+        }
+
+        //
+        // $.ajax({
+        //   url: api_url,
+        //   method: "POST",
+        //   dataType: "json", // JSONP maybe needed sometimes
+        //   data: {
+        //     app_id: API_ID,
+        //     app_key: API_KEY,
+        //     // image: i,
+        //     subject_id: 'Nadal',
+        //     gallery_name: 'kevinGallery',
+        //   },
+        //   success: function (res) {
+        //     console.log('SUCCESS', res);
+        //   },
+        //   error: function (err) {
+        //     console.log('ERROR', err);
+        //   }
+        // });
+        // $.ajax(api_url, {
+        //
+        // })
+
+      });
+    });
+  };
+
+  var init = function () {
+    initCamera();
+    capturePhoto();
+  };
+
+
+// });
