@@ -1,19 +1,19 @@
 ---
 development:
-  cloud_name: dsgd2hpbg
-  api_key: '585892794352456'
-  api_secret: uciEcBP1ruy3xp592AUPw56l2-A
+  cloud_name: Rails.application.secrets.cloudinary_cloud_name
+  api_key: Rails.application.secrets.cloudinary_api_key
+  api_secret: Rails.application.secrets.cloudinary_api_secret
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: dsgd2hpbg
-  api_key: '585892794352456'
-  api_secret: uciEcBP1ruy3xp592AUPw56l2-A
+  cloud_name: Rails.application.secrets.cloudinary_cloud_name
+  api_key: Rails.application.secrets.cloudinary_api_key
+  api_secret: Rails.application.secrets.cloudinary_api_secret
   enhance_image_tag: true
   static_image_support: true
 test:
-  cloud_name: dsgd2hpbg
-  api_key: '585892794352456'
-  api_secret: uciEcBP1ruy3xp592AUPw56l2-A
+  cloud_name: Rails.application.secrets.cloudinary_cloud_name
+  api_key: Rails.application.secrets.cloudinary_api_key
+  api_secret: Rails.application.secrets.cloudinary_api_secret
   enhance_image_tag: true
   static_image_support: false
