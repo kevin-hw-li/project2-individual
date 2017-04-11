@@ -89,7 +89,6 @@ $(document).ready(function () {
         var subjectID = "testo";
         console.log(subjectID, fileData.length, GALLERY_NAME);
 
-<<<<<<< HEAD
         $('#image_upload').unsigned_cloudinary_upload("test123",
           { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
           { multiple: false }
@@ -97,6 +96,17 @@ $(document).ready(function () {
         .bind('cloudinarydone', function(e, data) {
           console.log('DONE 1!', data);
           // ajax send to rails server: data.result.public_id
+          $.ajax({
+            url: "/images",
+            method: "POST",
+            data: { img_src: "data.result.public_id" },
+            success: function () {
+              console.log('SUCCESS');
+            },
+            error: function (err) {
+              console.log('ERROR', err);
+            },
+          })
         })
         .fileupload('add', { files: [ img ] });
 
@@ -133,12 +143,9 @@ $(document).ready(function () {
         //
         // })
 
-      });
-    });
-  };
-=======
+
         // debugger;
->>>>>>> c367b56ea666706e598a7b78e3fac63711b50240
+
 
         kairos.enroll(fileData, GALLERY_NAME, subjectID, function (data) {
           console.log('success!', data);
