@@ -54,7 +54,6 @@
       snap.get_blob(function(img){
         console.log(img, this);
 
-        // debugger;
         $('#image_upload').unsigned_cloudinary_upload("test123",
           { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
           { multiple: false }
