@@ -72,15 +72,6 @@ $(document).ready(function () {
     snap.get_blob(function(img){
       console.log(img, this);
 
-      // $('#image_upload').unsigned_cloudinary_upload("test123",
-      //   { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
-      //   { multiple: false }
-      // )
-      // .bind('cloudinarydone', function(e, data) {
-      //   console.log('DONE 1!', data);
-      //   // ajax send to rails server: data.result.public_id
-      // })
-      // .fileupload('add', { files: [ img ] });
 
       var reader  = new FileReader();
       reader.readAsDataURL(img);
@@ -90,27 +81,6 @@ $(document).ready(function () {
 
         console.log(subjectID, fileData.length, GALLERY_NAME);
 
-<<<<<<< HEAD
-        $('#image_upload').unsigned_cloudinary_upload("test123",
-          { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
-          { multiple: false }
-        )
-        .bind('cloudinarydone', function(e, data) {
-          console.log('DONE 1!', data);
-          // ajax send to rails server: data.result.public_id
-          $.ajax({
-            url: "/images",
-            method: "POST",
-            data: { img_src: "data.result.public_id" },
-            success: function () {
-              console.log('SUCCESS');
-            },
-            error: function (err) {
-              console.log('ERROR', err);
-            },
-          })
-        })
-        .fileupload('add', { files: [ img ] });
 
         var reader  = new FileReader();
         reader.readAsDataURL(img);
@@ -122,42 +92,13 @@ $(document).ready(function () {
           // console.log(fileData);
         }
 
-        //
-        // $.ajax({
-        //   url: api_url,
-        //   method: "POST",
-        //   dataType: "json", // JSONP maybe needed sometimes
-        //   data: {
-        //     app_id: API_ID,
-        //     app_key: API_KEY,
-        //     // image: i,
-        //     subject_id: 'Nadal',
-        //     gallery_name: 'kevinGallery',
-        //   },
-        //   success: function (res) {
-        //     console.log('SUCCESS', res);
-        //   },
-        //   error: function (err) {
-        //     console.log('ERROR', err);
-        //   }
-        // });
-        // $.ajax(api_url, {
-        //
-        // })
-
-
-        // debugger;
-
-
-
         kairos.enroll(fileData, GALLERY_NAME, subjectID, function (data) {
           console.log('success!', data);
 
         // kairos.detect(fileData, function (response) {
         //   console.log(response.responseText);
         // })
-=======
->>>>>>> c6f200a727213b9194da1144b22c2b9f8455f6fe
+
         kairos.enroll(fileData, GALLERY_NAME, subjectID, function (response) {
           if (response.responseText.length < 100) {
             // flash an error message
@@ -169,9 +110,9 @@ $(document).ready(function () {
 
         });
         // console.log(fileData);
-      }
+      });
 
-    });
+    };
 
   });
 
@@ -190,9 +131,7 @@ $(document).ready(function () {
 
         console.log(subjectID, fileData.length, GALLERY_NAME);
 
-<<<<<<< HEAD
 
-=======
         kairos.verify(fileData, GALLERY_NAME, subjectID, function (response) {
           if (response.responseText.length < 100 || JSON.parse(response.responseText).images[0].transaction.confidence < 0.6) {
             // flash an error message
@@ -201,13 +140,14 @@ $(document).ready(function () {
             $("#verify").attr("type", "submit").trigger("click")
           }
           // JSON.parse(response.responseText)
->>>>>>> c6f200a727213b9194da1144b22c2b9f8455f6fe
+
         });
         // console.log(fileData);
-      });
+      };
 
     });
 
   });
 
+ });
 });
