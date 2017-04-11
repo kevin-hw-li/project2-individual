@@ -72,15 +72,6 @@ $(document).ready(function () {
     snap.get_blob(function(img){
       console.log(img, this);
 
-      // $('#image_upload').unsigned_cloudinary_upload("test123",
-      //   { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
-      //   { multiple: false }
-      // )
-      // .bind('cloudinarydone', function(e, data) {
-      //   console.log('DONE 1!', data);
-      //   // ajax send to rails server: data.result.public_id
-      // })
-      // .fileupload('add', { files: [ img ] });
 
       var reader  = new FileReader();
       reader.readAsDataURL(img);
@@ -89,6 +80,24 @@ $(document).ready(function () {
         var subjectID = $("#user_name").val()
 
         console.log(subjectID, fileData.length, GALLERY_NAME);
+
+
+        var reader  = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onloadend = function () {
+          var fileData = parseImageData(reader.result);
+          kairos.enroll(fileData, GALLERY_NAME, 'jared', function (data) {
+            console.log('success!', data);
+          });
+          // console.log(fileData);
+        }
+
+        kairos.enroll(fileData, GALLERY_NAME, subjectID, function (data) {
+          console.log('success!', data);
+
+        // kairos.detect(fileData, function (response) {
+        //   console.log(response.responseText);
+        // })
 
         kairos.enroll(fileData, GALLERY_NAME, subjectID, function (response) {
           if (response.responseText.length < 100) {
@@ -101,9 +110,9 @@ $(document).ready(function () {
 
         });
         // console.log(fileData);
-      }
+      });
 
-    });
+    };
 
   });
 
@@ -122,6 +131,7 @@ $(document).ready(function () {
 
         console.log(subjectID, fileData.length, GALLERY_NAME);
 
+
         kairos.verify(fileData, GALLERY_NAME, subjectID, function (response) {
           if (response.responseText.length < 100 || JSON.parse(response.responseText).images[0].transaction.confidence < 0.6) {
             // flash an error message
@@ -130,12 +140,14 @@ $(document).ready(function () {
             $("#verify").attr("type", "submit").trigger("click")
           }
           // JSON.parse(response.responseText)
+
         });
         // console.log(fileData);
-      }
+      };
 
     });
 
   });
 
+ });
 });
