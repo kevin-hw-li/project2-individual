@@ -147,12 +147,12 @@ $(document).ready(function () {
 
 
         // debugger;
-<<<<<<< HEAD
+
 
 
         kairos.enroll(fileData, GALLERY_NAME, subjectID, function (data) {
           console.log('success!', data);
-=======
+
         // kairos.detect(fileData, function (response) {
         //   console.log(response.responseText);
         // })
@@ -164,13 +164,13 @@ $(document).ready(function () {
           }
           console.log(response.responseText);
           // JSON.parse(response.responseText)
->>>>>>> 4d5b5cbfa781160b553a99468c15c0e2d901fc89
+
 
 
 
         });
         // console.log(fileData);
-      }
+      });
 
     });
 
