@@ -66,7 +66,7 @@ $(document).ready(function () {
 
   initCamera();
 
-  $('#capture').on('click', function (e) {
+  $('#enroll').on('click', function (e) {
 
     var snap = camera.capture();
     snap.get_blob(function(img){
@@ -87,10 +87,10 @@ $(document).ready(function () {
       reader.onloadend = function () {
         var fileData = parseImageData(reader.result);
         var subjectID = $("#user_name").val()
-        // var subjectID = "test13"
-        // debugger
+
         console.log(subjectID, fileData.length, GALLERY_NAME);
 
+<<<<<<< HEAD
         $('#image_upload').unsigned_cloudinary_upload("test123",
           { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
           { multiple: false }
@@ -156,18 +156,52 @@ $(document).ready(function () {
         // kairos.detect(fileData, function (response) {
         //   console.log(response.responseText);
         // })
+=======
+>>>>>>> c6f200a727213b9194da1144b22c2b9f8455f6fe
         kairos.enroll(fileData, GALLERY_NAME, subjectID, function (response) {
           if (response.responseText.length < 100) {
             // flash an error message
+            console.log(response.responseText);
           } else {
-            $("#capture").attr("type", "submit").trigger("click")
+            $("#enroll").attr("type", "submit").trigger("click")
           }
-          console.log(response.responseText);
           // JSON.parse(response.responseText)
 
+        });
+        // console.log(fileData);
+      }
+
+    });
+
+  });
 
 
+  $('#verify').on('click', function (e) {
 
+    var snap = camera.capture();
+    snap.get_blob(function(img){
+      console.log(img, this);
+
+      var reader  = new FileReader();
+      reader.readAsDataURL(img);
+      reader.onloadend = function () {
+        var fileData = parseImageData(reader.result);
+        var subjectID = $("#username").val()
+
+        console.log(subjectID, fileData.length, GALLERY_NAME);
+
+<<<<<<< HEAD
+
+=======
+        kairos.verify(fileData, GALLERY_NAME, subjectID, function (response) {
+          if (response.responseText.length < 100 || JSON.parse(response.responseText).images[0].transaction.confidence < 0.6) {
+            // flash an error message
+            console.log(response.responseText);
+          } else {
+            $("#verify").attr("type", "submit").trigger("click")
+          }
+          // JSON.parse(response.responseText)
+>>>>>>> c6f200a727213b9194da1144b22c2b9f8455f6fe
         });
         // console.log(fileData);
       });
