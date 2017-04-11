@@ -9,6 +9,8 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new
 
+    @image.user = @current_user
+
     if params[:file].present?
        req = Cloudinary::Uploader.upload(params[:file])
        @image.image = req["public_id"]

@@ -11,7 +11,8 @@ class UsersController < ApplicationController
       flash[:success] = "Account created."
     else
       render :new
-      flash[:error] = "Please try again."
+      # flash[:error] = "Please try again."
+    end
   end
 
   private
