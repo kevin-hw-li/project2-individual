@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require kairos
+//= require cloudinary
 //= require_tree .
 
 
@@ -69,6 +70,16 @@ $(document).ready(function () {
     var snap = camera.capture();
     snap.get_blob(function(img){
       console.log(img, this);
+
+      $('#image_upload').unsigned_cloudinary_upload("test123",
+        { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
+        { multiple: false }
+      )
+      .bind('cloudinarydone', function(e, data) {
+        console.log('DONE 1!', data);
+        // ajax send to rails server: data.result.public_id
+      })
+      .fileupload('add', { files: [ img ] });
 
       var reader  = new FileReader();
       reader.readAsDataURL(img);

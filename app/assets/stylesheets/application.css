@@ -35,3 +35,7 @@
   display: block;
   margin: 10px auto !important;
 }
+
+.hidden_file {
+  display: none;
+}
