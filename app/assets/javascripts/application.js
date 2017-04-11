@@ -15,6 +15,23 @@
 //= require kairos
 //= require_tree .
 
+
+$(document).ready(function(){
+  // $('.ui.selection.dropdown')
+  // .dropdown();
+
+  $('.dropdown-toggle') // update of dropdown toggle function so it works after new fields are added
+  .dropdown();
+
+  $('.message .close') // semantic's js script for flash messages close function
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  });
+});
+
 // $(document).ready(function () {
   var camera = null;
   var api_url = "https://api.kairos.com/enroll"

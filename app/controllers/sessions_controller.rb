@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
     else
       redirect_to signin_path
       flash[:error] = "Something went wrong. Please try again."
+    end
   end
 
   def destroy

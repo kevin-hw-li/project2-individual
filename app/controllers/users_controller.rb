@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     else
       render :new
       flash[:error] = "Please try again."
+    end
   end
 
   private
