@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :fetch_user
 
   def fetch_user
-    @current_user = User.find_by_id(sessions[:user_id])
+    @current_user = User.find_by_id(session[:user_id])
   end
 
   def authenticate_user

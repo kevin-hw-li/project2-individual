@@ -20,3 +20,7 @@
   width: 250px;
   height: 250px;
 }
+
+.hidden_file {
+  display: none;
+}
