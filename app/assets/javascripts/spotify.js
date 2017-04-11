@@ -49,17 +49,13 @@ app.events = function () {
     console.log(baseUrl);
   };
 
-
 var getRandomPlaylist = function(playlist){
   var randNum = Math.floor(Math.random() * playlist.length);
   return playlist[randNum];
 };
 
-
 app.init = function () {
   app.events();
-
 };
-
 
 $(app.init);
