@@ -19,6 +19,21 @@
 #camera {
   width: 250px;
   height: 250px;
+  margin: auto !important;
+}
+
+.ui.large.form {
+  width: 100%;
+}
+
+.field {
+  width: 50%;
+  margin-left: 25% !important;
+}
+
+.ui.button {
+  display: block;
+  margin: 10px auto !important;
 }
 
 .hidden_file {

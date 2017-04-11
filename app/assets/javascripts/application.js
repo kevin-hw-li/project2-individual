@@ -16,96 +16,92 @@
 //= require cloudinary
 //= require_tree .
 
-// $(document).ready(function () {
-  var camera = null;
-  var api_url = "https://api.kairos.com/enroll"
 
-  var API_ID = "4b76f596";
-  var API_KEY = "3326986684ad5d3fde93d958cddcfb1f";
-  var GALLERY_NAME = "kevinGallery";
-  var kairos = new Kairos(API_ID, API_KEY);
-  console.log(kairos);
+$(document).ready(function(){
 
-  var parseImageData = function(imageData) {
-      imageData = imageData.replace("data:image/jpeg;base64,", "");
-      imageData = imageData.replace("data:image/jpg;base64,", "");
-      imageData = imageData.replace("data:image/png;base64,", "");
-      imageData = imageData.replace("data:image/gif;base64,", "");
-      imageData = imageData.replace("data:image/bmp;base64,", "");
-      return imageData;
+  $('.dropdown-toggle') // semantic ui
+  .dropdown();
+
+  $('.message .close') // semantic ui
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade');
+  })
+});
+
+var camera = null;
+var api_url = "https://api.kairos.com/enroll"
+
+var API_ID = "4b76f596";
+var API_KEY = "3326986684ad5d3fde93d958cddcfb1f";
+var GALLERY_NAME = "Users";
+var kairos = new Kairos(API_ID, API_KEY);
+console.log(kairos);
+
+var parseImageData = function(imageData) {
+    imageData = imageData.replace("data:image/jpeg;base64,", "");
+    imageData = imageData.replace("data:image/jpg;base64,", "");
+    imageData = imageData.replace("data:image/png;base64,", "");
+    imageData = imageData.replace("data:image/gif;base64,", "");
+    imageData = imageData.replace("data:image/bmp;base64,", "");
+    return imageData;
+}
+
+var initCamera = function () {
+  if (!window.JpegCamera) {
+    alert('Camera access is not available in your browser');
+  } else {
+    camera = new JpegCamera('#camera')
+      .ready(function (resolution) {})
+      .error(function () {
+      alert('Camera access was denied');
+    })
   }
+};
 
-  var initCamera = function () {
-    if (!window.JpegCamera) {
-      alert('Camera access is not available in your browser');
-    } else {
-      camera = new JpegCamera('#camera')
-        .ready(function (resolution) {})
-        .error(function () {
-        alert('Camera access was denied');
+
+$(document).ready(function () {
+
+  initCamera();
+
+  $('#capture').on('click', function (e) {
+
+    var snap = camera.capture();
+    snap.get_blob(function(img){
+      console.log(img, this);
+
+      $('#image_upload').unsigned_cloudinary_upload("test123",
+        { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
+        { multiple: false }
+      )
+      .bind('cloudinarydone', function(e, data) {
+        console.log('DONE 1!', data);
+        // ajax send to rails server: data.result.public_id
       })
-    }
-  };
+      .fileupload('add', { files: [ img ] });
 
-  var capturePhoto = function () {
-    $('#capture').on('click', function () {
-
-      var snap = camera.capture();
-      snap.get_blob(function(img){
-        console.log(img, this);
+      var reader  = new FileReader();
+      reader.readAsDataURL(img);
+      reader.onloadend = function () {
+        var fileData = parseImageData(reader.result);
+        // var subjectID = $("#user_name").val()
+        var subjectID = "testo";
+        console.log(subjectID, fileData.length, GALLERY_NAME);
 
         // debugger;
-        $('#image_upload').unsigned_cloudinary_upload("test123",
-          { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
-          { multiple: false }
-        )
-        .bind('cloudinarydone', function(e, data) {
-          console.log('DONE 1!', data);
-          // ajax send to rails server: data.result.public_id
-        })
-        .fileupload('add', { files: [ img ] });
 
-        var reader  = new FileReader();
-        reader.readAsDataURL(img);
-        reader.onloadend = function () {
-          var fileData = parseImageData(reader.result);
-          kairos.enroll(fileData, GALLERY_NAME, 'jared', function (data) {
-            console.log('success!', data);
-          });
-          // console.log(fileData);
-        }
+        kairos.enroll(fileData, GALLERY_NAME, subjectID, function (data) {
+          console.log('success!', data);
 
-        //
-        // $.ajax({
-        //   url: api_url,
-        //   method: "POST",
-        //   dataType: "json", // JSONP maybe needed sometimes
-        //   data: {
-        //     app_id: API_ID,
-        //     app_key: API_KEY,
-        //     // image: i,
-        //     subject_id: 'Nadal',
-        //     gallery_name: 'kevinGallery',
-        //   },
-        //   success: function (res) {
-        //     console.log('SUCCESS', res);
-        //   },
-        //   error: function (err) {
-        //     console.log('ERROR', err);
-        //   }
-        // });
-        // $.ajax(api_url, {
-        //
-        // })
 
-      });
+
+        });
+        // console.log(fileData);
+      }
+
     });
-  };
 
-  var init = function () {
-    initCamera();
-    capturePhoto();
-  };
+  });
 
-
-// });
+});
