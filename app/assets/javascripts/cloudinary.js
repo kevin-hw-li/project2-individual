@@ -45,7 +45,7 @@ $(document).ready(function(){
           }) // closes ajax post request
         }) //closes cludinary bind
         .fileupload('add', { files: [ img ] });
-       }; //closes reader onloadend
-      }); //closes snap capture
-   });  //cloese event handler
+      }; //closes reader onloadend
+    }); //closes snap capture
+  });  //cloese event handler
 });  //closes doc ready
