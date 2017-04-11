@@ -47,13 +47,11 @@
   };
 
   var capturePhoto = function () {
-    $('#capture').on('click',function () {
+    $('#capture').on('click', function () {
 
       var snap = camera.capture();
       snap.get_blob(function(img){
         console.log(img, this);
-
-        // $('.hidden_file').fileupload('option', 'formData').file = img;
 
         var reader  = new FileReader();
         reader.readAsDataURL(img);
