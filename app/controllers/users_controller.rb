@@ -6,19 +6,19 @@ class UsersController < ApplicationController
   def create
     @user = User.create(clean_params)
     if @user.save
-      @user.id = session[:user_id]
+      session[:user_id] = @user.id
       redirect_to root_path
       flash[:success] = "Account created."
     else
       render :new
-      # flash[:error] = "Please try again."
+      flash[:error] = "Please try again."
     end
   end
 
   private
 
   def clean_params
-    params.require(:user).permit(:name, :email, :image_id)
+    params.require(:user).permit(:name, :email)
   end
 
 end

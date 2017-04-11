@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_name(params[:name])
-    if user.present? && user.authenticate(params[:image_id])
-      user.id = session[:user_id]
+    if user.present? # && user.authenticate(params[:name])
+      session[:user_id] = user.id
       redirect_to root_path
       flash[:success] = "You have successfully signed in."
     else
