@@ -1,0 +1,11 @@
+<h1>Images New</h1>
+
+<div id="camera"></div>
+
+<button id="capture">Capture</button>
+
+<%= cl_image_upload_tag(:image_id, :resource_type => :image, :html => {:class => "hidden_file", :id => 'image_upload' }) %>
+
+<script type="text/javascript">
+  init();
+</script>
