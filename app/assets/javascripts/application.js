@@ -39,6 +39,7 @@ var GALLERY_NAME = "Users";
 var kairos = new Kairos(API_ID, API_KEY);
 console.log(kairos);
 
+
 var parseImageData = function(imageData) {
     imageData = imageData.replace("data:image/jpeg;base64,", "");
     imageData = imageData.replace("data:image/jpg;base64,", "");
@@ -71,28 +72,37 @@ $(document).ready(function () {
     snap.get_blob(function(img){
       console.log(img, this);
 
-      $('#image_upload').unsigned_cloudinary_upload("test123",
-        { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
-        { multiple: false }
-      )
-      .bind('cloudinarydone', function(e, data) {
-        console.log('DONE 1!', data);
-        // ajax send to rails server: data.result.public_id
-      })
-      .fileupload('add', { files: [ img ] });
+      // $('#image_upload').unsigned_cloudinary_upload("test123",
+      //   { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
+      //   { multiple: false }
+      // )
+      // .bind('cloudinarydone', function(e, data) {
+      //   console.log('DONE 1!', data);
+      //   // ajax send to rails server: data.result.public_id
+      // })
+      // .fileupload('add', { files: [ img ] });
 
       var reader  = new FileReader();
       reader.readAsDataURL(img);
       reader.onloadend = function () {
         var fileData = parseImageData(reader.result);
-        // var subjectID = $("#user_name").val()
-        var subjectID = "testo";
+        var subjectID = $("#user_name").val()
+        // var subjectID = "test13"
+        // debugger
         console.log(subjectID, fileData.length, GALLERY_NAME);
 
         // debugger;
-
-        kairos.enroll(fileData, GALLERY_NAME, subjectID, function (data) {
-          console.log('success!', data);
+        // kairos.detect(fileData, function (response) {
+        //   console.log(response.responseText);
+        // })
+        kairos.enroll(fileData, GALLERY_NAME, subjectID, function (response) {
+          if (response.responseText.length < 100) {
+            // flash an error message
+          } else {
+            $("#capture").attr("type", "submit").trigger("click")
+          }
+          console.log(response.responseText);
+          // JSON.parse(response.responseText)
 
 
 

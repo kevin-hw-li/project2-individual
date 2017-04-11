@@ -3,7 +3,7 @@ var app = app || {};
 app.apiUrl = 'https://api.spotify.com/v1';
 //user can enter a search term for a playlist
 app.events = function () {
-  $('form').on('submit', function (e) {
+  $('searchForm').on('submit', function (e) {
     e.preventDefault();
     $('.loader').toggleClass('show');
     var playlists =  $('input[type=search]').val();
