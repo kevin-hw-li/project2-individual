@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
-  $('#capture').on('click', function (e) {
+  $('#capture').on('click', function () {
 
     var snap = camera.capture();
+
     snap.get_blob(function(img){
       console.log(img, this);
 

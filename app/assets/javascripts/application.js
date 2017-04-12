@@ -116,7 +116,7 @@ $(document).ready(function () {
 
   });
 
-  
+
   $('#verify').on('click', function (e) {
 
     var snap = camera.capture();
@@ -149,4 +149,5 @@ $(document).ready(function () {
 
   });
 
+ });
 });
