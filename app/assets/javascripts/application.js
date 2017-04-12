@@ -62,7 +62,7 @@ var initCamera = function () {
 };
 
 
-$(document).ready(function () {
+var signup = function () {
 
   initCamera();
 
@@ -70,8 +70,7 @@ $(document).ready(function () {
 
     var snap = camera.capture();
     snap.get_blob(function(img){
-      console.log(img, this);
-
+      // console.log(img, this);
 
       var reader  = new FileReader();
       reader.readAsDataURL(img);
@@ -79,25 +78,7 @@ $(document).ready(function () {
         var fileData = parseImageData(reader.result);
         var subjectID = $("#user_name").val()
 
-        console.log(subjectID, fileData.length, GALLERY_NAME);
-
-
-        var reader  = new FileReader();
-        reader.readAsDataURL(img);
-        reader.onloadend = function () {
-          var fileData = parseImageData(reader.result);
-          kairos.enroll(fileData, GALLERY_NAME, 'jared', function (data) {
-            console.log('success!', data);
-          });
-          // console.log(fileData);
-        }
-
-        kairos.enroll(fileData, GALLERY_NAME, subjectID, function (data) {
-          console.log('success!', data);
-
-        // kairos.detect(fileData, function (response) {
-        //   console.log(response.responseText);
-        // })
+        // console.log(subjectID, fileData.length, GALLERY_NAME);
 
         kairos.enroll(fileData, GALLERY_NAME, subjectID, function (response) {
           if (response.responseText.length < 100) {
@@ -107,21 +88,23 @@ $(document).ready(function () {
             $("#enroll").attr("type", "submit").trigger("click")
           }
           // JSON.parse(response.responseText)
-
-        });
+        })
         // console.log(fileData);
-      });
+      }
+    })
+  })
+};
 
-    };
+var signin = function () {
 
-  });
+  initCamera();
 
 
   $('#verify').on('click', function (e) {
 
     var snap = camera.capture();
     snap.get_blob(function(img){
-      console.log(img, this);
+      // console.log(img, this);
 
       var reader  = new FileReader();
       reader.readAsDataURL(img);
@@ -129,8 +112,7 @@ $(document).ready(function () {
         var fileData = parseImageData(reader.result);
         var subjectID = $("#username").val()
 
-        console.log(subjectID, fileData.length, GALLERY_NAME);
-
+        // console.log(subjectID, fileData.length, GALLERY_NAME);
 
         kairos.verify(fileData, GALLERY_NAME, subjectID, function (response) {
           if (response.responseText.length < 100 || JSON.parse(response.responseText).images[0].transaction.confidence < 0.6) {
@@ -140,14 +122,9 @@ $(document).ready(function () {
             $("#verify").attr("type", "submit").trigger("click")
           }
           // JSON.parse(response.responseText)
-
-        });
+        })
         // console.log(fileData);
-      };
-
-    });
-
-  });
-
- });
-});
+      }
+    })
+  })
+};

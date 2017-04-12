@@ -1,4 +1,6 @@
-$(document).ready(function(){
+var captureImage = function () {
+
+  initCamera();
 
   $('#capture').on('click', function () {
 
@@ -49,4 +51,6 @@ $(document).ready(function(){
       }; //closes reader onloadend
     }); //closes snap capture
   });  //cloese event handler
-});  //closes doc ready
+
+
+}; 
