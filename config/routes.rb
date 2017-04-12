@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "pages#index"
+  root "sessions#new"
 
   resources :users, only: [:new, :create]
   get "signin", to: "sessions#new", as: "signin"

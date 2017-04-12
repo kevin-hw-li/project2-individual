@@ -53,4 +53,4 @@ var captureImage = function () {
   });  //cloese event handler
 
 
-}; 
+};
