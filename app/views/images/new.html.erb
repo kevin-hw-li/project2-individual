@@ -6,7 +6,7 @@
 
   <button id="capture">Capture</button>
 </div>
-
+<%= cl_image_upload_tag(:image_id, :resource_type => :image, :html => {:class => "hidden_file", :id => 'image_upload' }) %>
 <script type="text/javascript">
   captureImage()
 </script>
