@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     if @current_user
-      redirect_to playlists_path
+      redirect_to "/images/new"
     end
   end
 
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by_name(params[:name])
     if user.present? # && user.authenticate(params[:name])
       session[:user_id] = user.id
-      redirect_to playlists_path
+      redirect_to "/images/new"
       flash[:success] = "You have successfully signed in."
     else
       redirect_to signin_path

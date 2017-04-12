@@ -19,7 +19,7 @@
 #camera {
   width: 400px;
   height: 400px;
-  margin: auto !important;
+  margin: 0 auto !important;
   margin-bottom: 10px !important;
 }
 
@@ -59,8 +59,20 @@
   #camera {
     width: 250px;
     height: 250px;
-    margin: auto !important;
+    margin: 0 auto !important;
     margin-bottom: 10px !important;
 
   }
+}
+
+.column.left {
+  margin: 10% auto;
+  display: block !important;
+  float: left !important;
+}
+
+.playlist {
+  margin: 10% auto;
+  display: block !important;
+  float: right !important;
 }

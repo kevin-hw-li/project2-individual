@@ -8,9 +8,8 @@ app.events = function () {
 
     e.preventDefault();
     $('.loader').toggleClass('show');
-    var playlists =  $('input[type=search]').val();
+    // var playlists =  $('input[type=search]').val();
     var playlistUris = [];
-    debugger;
     playlists = playlists.split(',');
     var search = playlists.map(playlistName => app.searchPlaylists(playlistName));
 

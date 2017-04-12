@@ -1,12 +1,32 @@
-<div class="ui main text container">
+<main class="main-container">
+  <div class="column left">
 
-  <h1>Images New</h1>
+    <div id="camera"></div>
 
-  <div id="camera"></div>
+    <button id="capture" class="ui button">Capture</button>
 
-  <button id="capture">Capture</button>
-</div>
+  </div>
+
+  <div class="playlist">
+    <div class="loader">
+      <div class="inner-circle"></div>
+    </div>
+  </div>
+
+  <section class="column right" style="display: none">
+    <div class="searchForm">
+      <form action="">
+        <input type="search" value="">
+        <input type="button" value="Create" id="create">
+      </form>
+
+    </div>
+
+  </section>
+</main>
+
 <%= cl_image_upload_tag(:image_id, :resource_type => :image, :html => {:class => "hidden_file", :id => 'image_upload' }) %>
+
 <script type="text/javascript">
   captureImage()
 </script>
