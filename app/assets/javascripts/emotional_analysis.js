@@ -2,7 +2,7 @@ var emotionAnalysis = function () {
 
   initCamera();
 
-  $('#capture').on('click', function (e) {
+  $('#emotion').on('click', function (e) {
 
     var snap = camera.capture();
     snap.get_blob(function(img){

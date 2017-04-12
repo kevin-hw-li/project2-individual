@@ -10,11 +10,12 @@ class ImagesController < ApplicationController
     @image = Image.new
 
     @image.user = @current_user
-
-    if params[:file].present?
-       req = Cloudinary::Uploader.upload(params[:file])
-       @image.image = req["public_id"]
-     end
+    @image.img_src = params[:img_src]
+    #
+    # if params[:file].present?
+    #    req = Cloudinary::Uploader.upload(params[:file])
+    #    @image.image = req["public_id"]
+    #  end
 
      if @image.save
        redirect_to root_path

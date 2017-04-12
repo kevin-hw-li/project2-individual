@@ -17,6 +17,8 @@
 //= require_tree .
 
 
+
+
 $(document).ready(function(){
 
   $('.dropdown-toggle') // semantic ui
