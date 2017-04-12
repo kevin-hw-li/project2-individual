@@ -1,11 +1,11 @@
-<h1>Images New</h1>
+<div class="ui main text container">
 
-<div id="camera"></div>
+  <h1>Images New</h1>
 
-<button id="capture">Capture</button>
+  <div id="camera"></div>
 
-
-<%= cl_image_upload_tag(:image_id, :resource_type => :image, :html => {:class => "hidden_file", :id => 'image_upload' }) %>
+  <button id="capture">Capture</button>
+</div>
 
 <script type="text/javascript">
   captureImage()

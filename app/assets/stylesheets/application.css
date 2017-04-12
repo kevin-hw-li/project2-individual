@@ -17,9 +17,10 @@
 
 
 #camera {
-  width: 250px;
-  height: 250px;
+  width: 400px;
+  height: 400px;
   margin: auto !important;
+  margin-bottom: 10px !important;
 }
 
 .ui.large.form {
@@ -38,4 +39,28 @@
 
 #image_upload {
   display: none;
+}
+
+.ui.inverted.segment.green {
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.ui.middle.aligned.center.aligned.grid {
+  margin: 10% auto;
+}
+
+@media screen and (max-width: 960px){
+  .body {
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  #camera {
+    width: 250px;
+    height: 250px;
+    margin: auto !important;
+    margin-bottom: 10px !important;
+
+  }
 }

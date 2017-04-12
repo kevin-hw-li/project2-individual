@@ -1,24 +1,30 @@
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-    <h2 class="ui header">
-      <div class="content">Sign up now
+<div class="ui main text container">
+
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui header">
+        <div class="content">Sign up now
+        </div>
+      </h2>
+
+      <div id="camera"></div>
+
+      <%= form_for @user, html: {class: "ui large form"} do |el| %>
+      <div class="field">
+        <%= el.text_field :name, placeholder: "Username" %>
       </div>
-    </h2>
-    <%= form_for @user, html: {class: "ui large form"} do |el| %>
-    <div class="field">
-      <%= el.text_field :name, placeholder: "Username" %>
-    </div>
-    <div class="field">
-      <%= el.text_field :email, placeholder: "Email address" %>
-    </div>
-    <div id="camera"></div>
+      <div class="field">
+        <%= el.text_field :email, placeholder: "Email address" %>
+      </div>
 
-      <%= el.button "Sign Up", class: "ui large button", id: "enroll", type: "button" %>
+        <%= el.button "Sign Up", class: "ui large button", id: "enroll", type: "button" %>
 
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<script type="text/javascript">
-  signup()
-</script>
+  <script type="text/javascript">
+    signup()
+  </script>
+
+</div>

@@ -101,7 +101,6 @@ var signin = function () {
 
   initCamera();
 
-
   $('#verify').on('click', function (e) {
 
     var snap = camera.capture();

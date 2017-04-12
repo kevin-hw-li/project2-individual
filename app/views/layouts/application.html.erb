@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Project2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -11,13 +13,13 @@
 
   <body>
     <%= render "includes/navigation" %>
-    <div class="ui main text container">
+    <!-- <div class="ui main text container"> -->
 
-      <div class="ui text container" id="flash-notices">
+      <!-- <div class="ui text container" id="flash-notices">
         <%= render "includes/flash_notices" %>
-      </div>
+      </div> -->
       <%= yield %>
-      
-    </div>
+
+    <!-- </div> -->
   </body>
 </html>
