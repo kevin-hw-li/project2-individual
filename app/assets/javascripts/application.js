@@ -111,15 +111,21 @@ var signin = function () {
       reader.readAsDataURL(img);
       reader.onloadend = function () {
         var fileData = parseImageData(reader.result);
-        var subjectID = $("#username").val()
+
 
         // console.log(subjectID, fileData.length, GALLERY_NAME);
 
-        kairos.verify(fileData, GALLERY_NAME, subjectID, function (response) {
-          if (response.responseText.length < 100 || JSON.parse(response.responseText).images[0].transaction.confidence < 0.6) {
+        kairos.recognize(fileData, GALLERY_NAME,  function (response) {
+
+          var jsonResponse = JSON.parse(response.responseText)
+
+          if (response.responseText.length < 100 || jsonResponse.images[0].transaction.confidence < 0.6) {
             // flash an error message
             console.log(response.responseText);
           } else {
+
+            document.getElementById('username').value = jsonResponse.images[0].transaction.subject_id
+
             $("#verify").attr("type", "submit").trigger("click")
           }
           // JSON.parse(response.responseText)

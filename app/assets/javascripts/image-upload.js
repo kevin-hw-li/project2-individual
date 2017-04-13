@@ -64,12 +64,15 @@ var captureImage = function () {
      .done(function(data) {
         //  JSON.stringify(data);
 
-        console.log(data[0].scores);
+        result = data[0].scores
 
-        emotion = Object.keys(data[0].scores).reduce(function(a, b){ return data[0].scores[a] > data[0].scores[b] ? a : b });
+        console.log(result);
+
+        emotion = Object.keys(result).reduce(function(a, b){ return result[a] > result[b] ? a : b });
 
         window.playlists = emotion
-        console.log("emotion: " + emotion);
+
+        console.log("emotion: " + emotion + " -> " + result[emotion]);
 
         $('#create').trigger("click")
 

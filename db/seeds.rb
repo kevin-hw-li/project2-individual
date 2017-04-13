@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 Image.destroy_all
-PLaylist.destroy_all
+Playlist.destroy_all
 
 u1 = User.create name: "Jared", email: "aaa@aaa.com", admin: true
 u2 = User.create name: "Kevin", email: "bbb@bbb.com", admin: false
