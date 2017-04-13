@@ -1,5 +1,12 @@
-<h1>Index Images</h1>
+<div class="ui main text container">
+  <h2 class="ui header">
+    <div class="content">
+      <h2><% @current_user %></h2>
+    </div>
+  </h2>
 
-<% @current_user.images.each do |i| %>
-  <%= cl_image_tag(i.img_src) %>
-<% end %>
+  <% @current_user.images.each do |i| %>
+    <%= cl_image_tag(i.img_src) %>
+  <% end %>
+
+</div>
