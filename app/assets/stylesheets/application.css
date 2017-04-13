@@ -52,27 +52,49 @@
 
 @media screen and (max-width: 960px){
   .body {
-    width: 100% !important;
+    width: 100vw !important;
     margin: 0 auto !important;
   }
 
+  .ui.item.welcome {
+    display: none !important;
+  }
+
   #camera {
-    width: 250px;
+    width: 100%;
     height: 250px;
     margin: 0 auto !important;
     margin-bottom: 10px !important;
+  }
 
+  .column.left {
+    float: none !important;
+    margin: 0 auto !important;
+  }
+
+  .playlist {
+    float: none !important;
+    margin: 0 auto !important;
+  }
+
+  .main-container {
+  	display: block;
+  }
+
+  iframe {
+    height: 300px;
+    width: 100vw;
   }
 }
 
 .column.left {
   margin: 10% auto;
   display: block !important;
-  float: left !important;
+  float: left;
 }
 
 .playlist {
   margin: 10% auto;
   display: block !important;
-  float: right !important;
+  float: right;
 }
