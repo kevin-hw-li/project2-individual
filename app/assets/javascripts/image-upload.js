@@ -14,31 +14,31 @@ var captureImage = function () {
   initCamera();
 
 
-  $('#f').change(function () {
-    console.log(this, this.files[0]);
-
-    var file = this.files[0];
-
-    $.ajax({
-     url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
-     beforeSend: function(xhrObj) {
-         // Request headers
-         xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
-         xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "8598cbde27b5447d9f22f6047e1f767e");
-     },
-     type: "POST",
-    //  data: JSON.stringify({url: 'http://res.cloudinary.com/dsgd2hpbg/image/upload/v1491973085/rjsjcp9ldicdyxomfngh.jpg'})
-     data: file,
-     contentType: file.type,
-     processData: false
-   })
-   .done(function(data) {
-      //  JSON.stringify(data);
-       console.log(data);
-   })
-   .fail(function(error) {
-       console.log(error.getAllResponseHeaders());
-   });
+  // $('#f').change(function () {
+  //   console.log(this, this.files[0]);
+  //
+  //   var file = this.files[0];
+  //
+  //   $.ajax({
+  //    url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
+  //    beforeSend: function(xhrObj) {
+  //        // Request headers
+  //        xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+  //        xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "8598cbde27b5447d9f22f6047e1f767e");
+  //    },
+  //    type: "POST",
+  //   //  data: JSON.stringify({url: 'http://res.cloudinary.com/dsgd2hpbg/image/upload/v1491973085/rjsjcp9ldicdyxomfngh.jpg'})
+  //    data: file,
+  //    contentType: file.type,
+  //    processData: false
+  //  })
+  //  .done(function(data) {
+  //     //  JSON.stringify(data);
+  //      console.log(data);
+  //  })
+  //  .fail(function(error) {
+  //      console.log(error.getAllResponseHeaders());
+  //  });
 
     // var reader  = new FileReader();
     // reader.readAsDataURL(this.files[0]);
@@ -74,7 +74,7 @@ var captureImage = function () {
     // };
 
 
-  });
+  
 
   $('#capture').on('click', function () {
 
