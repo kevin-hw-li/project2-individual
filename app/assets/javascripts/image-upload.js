@@ -3,7 +3,7 @@ var captureImage = function () {
 
   initCamera();
 
-  // What is this for?
+
   // $('#f').change(function () {
   //   console.log(this, this.files[0]);
   //
@@ -29,9 +29,44 @@ var captureImage = function () {
   //  .fail(function(error) {
   //      console.log(error.getAllResponseHeaders());
   //  });
-  //
-  //
-  // });
+
+
+    // var reader  = new FileReader();
+    // reader.readAsDataURL(this.files[0]);
+    // reader.onloadend = function () {
+    //   var fileData = parseImageData(reader.result);
+    //
+    //
+    //       $.ajax("https://api.kairos.com/v2/media?landmarks=1&source=url", // + '?source=' + encodeURIComponent(image_url),
+    //       {
+    //         method: "POST",
+    //         processData: false,
+    //         // contentType: this.files[0].type,
+    //         headers: {
+    //           app_id: API_ID,
+    //           app_key: API_KEY
+    //         },
+    //         data: {
+    //           source: fileData
+    //         },
+    //         // // data: {
+    //         //   image: 'test',
+    //         // //   source: 'test'
+    //         // // },
+    //         success: function (data) {
+    //           console.log('kairos success!', data );
+    //         },
+    //         error: function (data) {
+    //           console.log('kairos FUCKED!',  data );
+    //         }
+    //       });
+    //
+    //
+    // };
+
+
+
+
 
   $('#capture').on('click', function () {
 
