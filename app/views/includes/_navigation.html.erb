@@ -1,6 +1,9 @@
 <div class="ui inverted segment green">
   <div class="ui inverted pointing menu green">
     <%= link_to "Home", root_path, class: "ui item" %>
+    <% if @current_user %>
+      <%= link_to "Gallery", images_path, class: "ui item" %>
+    <% end %>
     <div class="right menu">
       <% if @current_user %>
         <div class="ui item">
