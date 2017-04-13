@@ -1,13 +1,3 @@
-var api_url = "https://api.kairos.com/v2/media";
-
-// var API_ID = "4b76f596";
-// var API_KEY = "3326986684ad5d3fde93d958cddcfb1f";
-// var GALLERY_NAME = "Users";
-// var kairos = new Kairos(API_ID, API_KEY);
-// console.log(kairos);
-
-
-
 
 var captureImage = function () {
 
@@ -39,6 +29,7 @@ var captureImage = function () {
   //  .fail(function(error) {
   //      console.log(error.getAllResponseHeaders());
   //  });
+
 
     // var reader  = new FileReader();
     // reader.readAsDataURL(this.files[0]);
@@ -74,7 +65,8 @@ var captureImage = function () {
     // };
 
 
-  
+
+
 
   $('#capture').on('click', function () {
 
@@ -83,10 +75,10 @@ var captureImage = function () {
     snap.get_blob(function(img){
       console.log(img, this);
 
-
       var file = img;
 
       // THIS WORKS
+      // PROJECT OXFORD
       $.ajax({
        url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
        beforeSend: function(xhrObj) {
@@ -106,110 +98,55 @@ var captureImage = function () {
      })
      .done(function(data) {
         //  JSON.stringify(data);
-         console.log(data);
+
+        console.log(data[0].scores);
+
+        emotion = Object.keys(data[0].scores).reduce(function(a, b){ return data[0].scores[a] > data[0].scores[b] ? a : b });
+
+        window.playlists = emotion
+        console.log("emotion: " + emotion);
+
+        $('#create').trigger("click")
+
      })
      .fail(function(error) {
-         console.log(error.getAllResponseHeaders());
+        console.log(error.getAllResponseHeaders());
      });
 
+     // CLOUDINARY
+     $('#image_upload').unsigned_cloudinary_upload("test123",
+       { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
+       { multiple: false }
+     )
+     .bind('cloudinarydone', function(e, data) {
+       console.log('DONE 1!', data);
+       // ajax send to rails server: data.result.public_id
+       $.ajax({
+         url: "/images",
+         method: "POST",
+         data: { img_src: data.result.public_id },
+         success: function () {
+           console.log('SUCCESS (image ID saved)');
+           //
+           var image_url = $.cloudinary.url(data.result.public_id);
+           // console.log('cloud URL:', image_url);
+         },
+         error: function (err) {
+           console.log('ERROR', err);
+         },
+       }) // closes ajax post request
+     }) //closes cloudinary bind
+     .fileupload('add', { files: [ img ] });  // perform upload
 
-      $('#image_upload').unsigned_cloudinary_upload("test123",
-        { cloud_name: 'dsgd2hpbg', tags: 'browser_uploads' },
-        { multiple: false }
-      )
-      .bind('cloudinarydone', function(e, data) {
-        console.log('DONE 1!', data);
-        // ajax send to rails server: data.result.public_id
-        $.ajax({
-          url: "/images",
-          method: "POST",
-          data: { img_src: data.result.public_id },
-          success: function () {
-            console.log('SUCCESS (image ID saved)');
-            //
-            var image_url = $.cloudinary.url(data.result.public_id);
-            // console.log('cloud URL:', image_url);
-            //
+     var reader  = new FileReader();
+     reader.readAsDataURL(img);
+     reader.onloadend = function () {
+       var fileData = parseImageData(reader.result);
 
+       console.log('file:', fileData.length)
 
-            // console.log('url', "https://api.kairos.com/v2/media" + '?source=' + encodeURIComponent(image_url), image_url);
-            // $.ajax("https://api.kairos.com/v2/media", // + '?source=' + encodeURIComponent(image_url),
-            // {
-            //   beforeSend: function(xhrObj) {
-            //       xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
-            //   },
-            //   method: "POST",
-            //   headers: {
-            //     app_id: API_ID,
-            //     app_key: API_KEY
-            //   },
-            //   data: file,
-            //   processData: false,
-            //   // // data: {
-            //   //   image: 'test',
-            //   // //   source: 'test'
-            //   // // },
-            //   success: function (data) {
-            //     console.log('kairos success!', data );
-            //   },
-            //   error: function (data) {
-            //     console.log('kairos FUCKED!',  data );
-            //   }
-            // });
+     }; //closes reader onloadend
 
-
-          },
-          error: function (err) {
-            console.log('ERROR', err);
-          },
-        }) // closes ajax post request
-      }) //closes cloudinary bind
-      .fileupload('add', { files: [ img ] });  // perform upload
-
-      var reader  = new FileReader();
-      reader.readAsDataURL(img);
-      reader.onloadend = function () {
-        var fileData = parseImageData(reader.result);
-
-        // $.ajax("https://api.kairos.com/v2/media?source=gofuckyourself",
-        // {
-        //   method: "POST",
-        //   headers: {
-        //     app_id: API_ID,
-        //     app_key: API_KEY
-        //   },
-        //   // data:
-        //   // {
-        //   //   source: image_url
-        //   // },
-        //   data: {
-        //     source: fileData,
-        //   },
-        //   success: function (data) {
-        //     console.log('kairos success!', data );
-        //   },
-        //   error: function (data) {
-        //     console.log('kairos FUCKED!',  data );
-        //   }
-        // });
-
-        // kairos.detect(fileData, function (response) {
-        //   if (response.responseText.length < 100) {
-        //     // flash an error message
-        //     console.log('%csuccess', response.responseText, 'font-color: red');
-        //   } else {
-        //     console.log('error?', response);
-        //     // $("#enroll").attr("type", "submit").trigger("click")
-        //   }
-        //   // JSON.parse(response.responseText)
-        // });
-
-        console.log('file:', fileData.length)
-
-
-
-
-      }; //closes reader onloadend
     }); //closes snap capture
   });  //cloese event handler
 
