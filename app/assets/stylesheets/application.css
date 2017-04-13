@@ -76,3 +76,8 @@
   display: block !important;
   float: right !important;
 }
+
+#emotion, #mood-result {
+  text-align: center;
+  font-size: 16pt;
+}

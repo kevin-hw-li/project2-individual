@@ -108,6 +108,12 @@ var captureImage = function () {
         window.playlists = emotion
 
         console.log("emotion: " + emotion + " -> " + result[emotion]);
+        console.log(result);
+        // $#emotion = document.getElementById("emotion").innerHTML
+        var size = parseInt(result[emotion] * 14) + 6;
+
+        $('#mood-result').html(emotion + ': ' + Math.round(result[emotion]*100)/100 )
+        .css({fontSize: size + 'pt' });
 
         $('#create').trigger("click")
 

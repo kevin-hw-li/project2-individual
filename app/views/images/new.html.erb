@@ -1,8 +1,10 @@
 <main class="main-container">
+  <div id="emotion"></div>
   <div class="column left">
 
-    <div id="camera"></div>
-
+    <div id="camera">
+    </div>
+    <div id="mood-result"></div>
     <button id="capture" class="ui button">Capture</button>
 
   </div>
@@ -19,12 +21,9 @@
         <input type="search" value="">
         <input type="button" value="Create" id="create">
       </form>
-
     </div>
-
   </section>
 </main>
-
 
 <%= cl_image_upload_tag(:image_id, :resource_type => :image, :html => {:class => "hidden_file", :id => 'image_upload' }) %>
 
