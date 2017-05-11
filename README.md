@@ -1,24 +1,10 @@
-# README
+# FACIAL RECOGNITION & EMOTION DETECTION APP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an app which allows users to log in by facial recognition, and generates a music playlist based on users' facial expression.
+[Access](https://facial-app.herokuapp.com/)
 
-Things you may want to cover:
+### LANGUAGES USED
 
-* Ruby version
+Ruby on rails, Javascript / jQuery, AJAX, JpegCamera, APIs (Kairos and Project Oxford), HTML, CSS
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Created by Kevin Li, Jared Colby, Petr Subotnik
