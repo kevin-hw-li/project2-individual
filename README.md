@@ -1,7 +1,7 @@
 # FACIAL RECOGNITION & EMOTION DETECTION APP
 
 This is an app which allows users to log in by facial recognition, and generates a music playlist based on users' facial expression.
-[Access](https://facial-app.herokuapp.com/)
+[Access](https://emoface.herokuapp.com/)
 
 ### LANGUAGES USED
 
